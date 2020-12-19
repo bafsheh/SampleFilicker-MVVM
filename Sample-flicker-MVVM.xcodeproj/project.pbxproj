@@ -8,22 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		EFF136EB258E51B300902415 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF136EA258E51B300902415 /* AppDelegate.swift */; };
-		EFF136ED258E51B300902415 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF136EC258E51B300902415 /* SceneDelegate.swift */; };
-		EFF136EF258E51B300902415 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF136EE258E51B300902415 /* ViewController.swift */; };
 		EFF136F2258E51B300902415 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFF136F0258E51B300902415 /* Main.storyboard */; };
 		EFF136F4258E51B600902415 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFF136F3258E51B600902415 /* Assets.xcassets */; };
 		EFF136F7258E51B600902415 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFF136F5258E51B600902415 /* LaunchScreen.storyboard */; };
+		EFF13707258E520A00902415 /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF13706258E520A00902415 /* SearchResultsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EFF136E7258E51B300902415 /* Sample-flicker-MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample-flicker-MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFF136EA258E51B300902415 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EFF136EC258E51B300902415 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EFF136EE258E51B300902415 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EFF136F1258E51B300902415 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EFF136F3258E51B600902415 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFF136F6258E51B600902415 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EFF136F8258E51B600902415 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFF13706258E520A00902415 /* SearchResultsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +54,62 @@
 		EFF136E9258E51B300902415 /* Sample-flicker-MVVM */ = {
 			isa = PBXGroup;
 			children = (
+				EFF13705258E51E600902415 /* Model */,
+				EFF13704258E51E100902415 /* Resource */,
+				EFF13703258E51D600902415 /* Service */,
+				EFF13702258E51D100902415 /* View */,
+				EFF13701258E51CA00902415 /* ViewController */,
+				EFF136FF258E51C200902415 /* ViewModel */,
 				EFF136EA258E51B300902415 /* AppDelegate.swift */,
-				EFF136EC258E51B300902415 /* SceneDelegate.swift */,
-				EFF136EE258E51B300902415 /* ViewController.swift */,
+			);
+			path = "Sample-flicker-MVVM";
+			sourceTree = "<group>";
+		};
+		EFF136FF258E51C200902415 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EFF13701258E51CA00902415 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		EFF13702258E51D100902415 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EFF13703258E51D600902415 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		EFF13704258E51E100902415 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
 				EFF136F0258E51B300902415 /* Main.storyboard */,
 				EFF136F3258E51B600902415 /* Assets.xcassets */,
 				EFF136F5258E51B600902415 /* LaunchScreen.storyboard */,
 				EFF136F8258E51B600902415 /* Info.plist */,
 			);
-			path = "Sample-flicker-MVVM";
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		EFF13705258E51E600902415 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EFF13706258E520A00902415 /* SearchResultsModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,9 +182,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFF136EF258E51B300902415 /* ViewController.swift in Sources */,
+				EFF13707258E520A00902415 /* SearchResultsModel.swift in Sources */,
 				EFF136EB258E51B300902415 /* AppDelegate.swift in Sources */,
-				EFF136ED258E51B300902415 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +332,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BRFFLHC8KL;
-				INFOPLIST_FILE = "Sample-flicker-MVVM/Info.plist";
+				INFOPLIST_FILE = "Sample-flicker-MVVM/Resource/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,7 +351,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BRFFLHC8KL;
-				INFOPLIST_FILE = "Sample-flicker-MVVM/Info.plist";
+				INFOPLIST_FILE = "Sample-flicker-MVVM/Resource/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
