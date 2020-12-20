@@ -59,16 +59,7 @@ class SearchVC:UIViewController {
             }
         }
     }
-
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toDetailsViewController" {
-            let controller = segue.destination as? DetailsVC
-            controller?.selectedData = viewModel.selectedData
-        }
-    }
 }
-
 // MARK: UICollectionViewDelegateFlowLayout
 extension SearchVC: UICollectionViewDelegateFlowLayout {
     func setupCollectionView() {
@@ -85,7 +76,20 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.viewModel.presentProfile(indexPath) { (_) in
-            self.performSegue(withIdentifier: "toDetailsViewController", sender: self)
+            
+            if let storyBoard = self.storyboard
+               ,let vc:DetailsVC = storyBoard.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsVC {
+                vc.selectedData = self.viewModel.selectedData
+                if let view = self.navigationController?.view {
+                    UIView.transition(
+                        with: view,
+                        duration: 0.75,
+                        options: .transitionFlipFromRight,
+                        animations: { [self] in
+                            self.navigationController?.pushViewController(vc, animated: false)
+                        })
+                }
+            }
         }
     }
 
