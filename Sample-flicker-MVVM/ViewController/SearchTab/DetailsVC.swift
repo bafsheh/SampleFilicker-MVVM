@@ -27,8 +27,20 @@ class DetailsVC: UIViewController {
 
     func setupUI() {
         self.navigationItem.title = "Details"
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "<--Search", style: .plain, target: self, action: #selector(back(sender:)))
+                self.navigationItem.leftBarButtonItem = newBackButton
+    }
+    @objc func back(sender: UIBarButtonItem) {
+        if let view = self.navigationController?.view {
+            UIView.transition(
+                with: view,
+                duration: 0.75,
+                options: .transitionFlipFromRight,
+                animations: { [self] in
+                    self.navigationController?.popViewController(animated: true)
+                })
+        }
     }
 
     func setupTableView() {

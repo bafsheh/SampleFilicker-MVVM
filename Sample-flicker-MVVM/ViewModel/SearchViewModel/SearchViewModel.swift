@@ -39,7 +39,7 @@ class  SearchViewModel {
                     if let results = converter.photos?.photo {
                         
                         self.dataSource?.data.value = results
-                        completion?(Result.success(true))
+                        completion?(Result.success(false))
                     } else {
                         self.onErrorHandling?(ErrorResult.parser(string: "unable to parse"))
                         completion?(Result.failure(ErrorResult.parser(string: "unable to parse")))
