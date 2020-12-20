@@ -13,4 +13,5 @@ struct APIConstants {
 
     //API Methods Name
     static let APIMethods_PhotosSearch =  "flickr.photos.search"
+    static let limit = "100"
 }
