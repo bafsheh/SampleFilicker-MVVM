@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 protocol SearchServiceCallProtocol: class {
-    func fetchPhotos(_ searchTerm: String , pageNumber:String, completion: @escaping ((Result<SearchResultsModel, ErrorResult>) -> Void))
+    func fetchPhotos(_ searchTerm: String , pageNumber:Int, completion: @escaping ((Result<SearchResultsModel, ErrorResult>) -> Void))
 }
 
 final class SearchServiceCall: SearchServiceCallProtocol {
@@ -20,7 +20,7 @@ final class SearchServiceCall: SearchServiceCallProtocol {
 
     
 
-    func fetchPhotos(_ searchTerm: String,pageNumber:String, completion: @escaping ((Result<SearchResultsModel, ErrorResult>) -> Void)) {
+    func fetchPhotos(_ searchTerm: String,pageNumber:Int, completion: @escaping ((Result<SearchResultsModel, ErrorResult>) -> Void)) {
 
         var parameters: [String: String] = [
             "method":APIConstants.APIMethods_PhotosSearch,
@@ -30,7 +30,7 @@ final class SearchServiceCall: SearchServiceCallProtocol {
             "safe_search":"1",
             "text":searchTerm,
             "per_page":APIConstants.limit,
-            "page":pageNumber
+            "page":"\(pageNumber)"
         ]
 
         if searchTerm.isEmpty {
@@ -44,7 +44,7 @@ final class SearchServiceCall: SearchServiceCallProtocol {
         }
         
     
-        
+        debugPrint("Page Number : \(pageNumber)")
         AF.request(endpoint,method: .get,parameters: parameters)
            .validate(statusCode: 200..<300)
            .responseJSON(completionHandler: { (response) in

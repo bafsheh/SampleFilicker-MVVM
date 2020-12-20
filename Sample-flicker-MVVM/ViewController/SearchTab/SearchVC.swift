@@ -16,6 +16,9 @@ class SearchVC:UIViewController {
     var activityIndicator: ActivityIndicator? = ActivityIndicator()
     var searchActive: Bool = false
     let dataSource = SearchViewDataSource()
+    private var isWaiting = false
+    private var isLastPage = false
+   
     lazy var viewModel: SearchViewModel = {
         let viewModel = SearchViewModel(dataSource: dataSource)
         return viewModel
@@ -50,12 +53,41 @@ class SearchVC:UIViewController {
         guard let strText = searchText else {return}
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.activityIndicator?.start()
-        self.viewModel.fetchServiceCall(strText,pageNumber:"1") { _ in
+        self.viewModel.fetchServiceCall(strText) { result in
             DispatchQueue.main.async {
-                self.activityIndicator?.stop()
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                self.searchActive = false
-                self.collectionView?.reloadData()
+                switch result {
+                case .success:
+                    self.activityIndicator?.stop()
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    self.searchActive = false
+                    self.collectionView?.reloadData()
+                    self.isWaiting = false
+                    self.isLastPage = false
+                    break
+                case .failure(let error) :
+                    self.showAlert(title: "Netwrok Error", message: error.localizedDescription)
+                }
+            }
+        }
+    }
+    private func loadMoreData() {
+        self.activityIndicator?.start()
+        self.viewModel.fetchNextPage() { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let isLastPage):
+                    self.activityIndicator?.stop()
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    self.searchActive = false
+                    self.collectionView?.reloadData()
+                    self.isWaiting = false
+                    self.isLastPage = isLastPage
+                    break
+                    
+                case .failure(let error) :
+                    self.showAlert(title: "Netwrok Error", message: error.localizedDescription)
+                    
+                }
             }
         }
     }
@@ -80,6 +112,7 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
             if let storyBoard = self.storyboard
                ,let vc:DetailsVC = storyBoard.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsVC {
                 vc.selectedData = self.viewModel.selectedData
+                vc.hidesBottomBarWhenPushed = true
                 if let view = self.navigationController?.view {
                     UIView.transition(
                         with: view,
@@ -111,6 +144,12 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == dataSource.data.value.count-1 && !self.isWaiting && !self.isLastPage  {
+            isWaiting = true;
+            self.loadMoreData()
+        }
     }
 }
 

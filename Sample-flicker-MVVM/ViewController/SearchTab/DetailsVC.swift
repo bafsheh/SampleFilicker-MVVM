@@ -23,6 +23,7 @@ class DetailsVC: UIViewController {
         self.setupViewModel()
         self.setupTableView()
     }
+    
 
     func setupUI() {
         self.navigationItem.title = "Details"
